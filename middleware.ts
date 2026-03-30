@@ -18,10 +18,8 @@ const AUTH_ONLY_ROUTES = ['/login'];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check for auth token in cookies (set by the API after OAuth)
-  // Adjust the cookie name to match what your backend sets
-  const token = request.cookies.get('token')?.value
-    ?? request.cookies.get('auth_token')?.value;
+  // Check for auth token in cookies (set by the client after OAuth callback)
+  const token = request.cookies.get('token')?.value;
 
   const isAuthenticated = Boolean(token);
   const isProtected = PROTECTED_PREFIXES.some((prefix) =>

@@ -40,9 +40,13 @@ export function setStoredToken(token: string | null): void {
   if (token) {
     localStorage.setItem('token', token);
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    // Set a browser cookie so Next.js middleware can read it
+    document.cookie = `token=${token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
   } else {
     localStorage.removeItem('token');
     delete api.defaults.headers.common['Authorization'];
+    // Remove the browser cookie
+    document.cookie = 'token=; path=/; max-age=0';
   }
 }
 

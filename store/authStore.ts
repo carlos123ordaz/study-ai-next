@@ -37,6 +37,10 @@ export const useAuthStore = create<AuthState>()(
 
       logout: () => {
         setAuthToken(null);
+        // Also clear the browser cookie used by middleware
+        if (typeof document !== 'undefined') {
+          document.cookie = 'token=; path=/; max-age=0';
+        }
         set({ user: null, token: null, isAuthenticated: false, isLoading: false });
       },
 
@@ -46,7 +50,13 @@ export const useAuthStore = create<AuthState>()(
       name: 'studyai-auth',
       partialize: (state) => ({ token: state.token }),
       onRehydrateStorage: () => (state) => {
-        if (state?.token) setAuthToken(state.token);
+        if (state?.token) {
+          setAuthToken(state.token);
+          // Ensure browser cookie exists for middleware on page reload
+          if (typeof document !== 'undefined') {
+            document.cookie = `token=${state.token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
+          }
+        }
       },
     }
   )
