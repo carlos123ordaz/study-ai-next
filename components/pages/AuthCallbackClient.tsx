@@ -25,10 +25,12 @@ export function AuthCallbackClient() {
     authService
       .getMe()
       .then((user) => {
+        console.log('Auth callback - user fetched:', user);
         setUser(user);
         router.replace('/dashboard');
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('Auth callback - getMe failed:', err);
         router.replace('/login');
       });
   }, [searchParams, router, setUser, setToken]);

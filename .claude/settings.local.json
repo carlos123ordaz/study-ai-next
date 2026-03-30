@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(grep -r 4001 /c/Users/carlo/OneDrive/Imágenes/Documentos/proyecto-repaso/frontend-next/ --include=*.ts --include=*.tsx --include=*.env* --include=*.json)"
-    ]
-  }
-}
