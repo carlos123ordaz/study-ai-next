@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
 // Next.js: NEXT_PUBLIC_ prefix instead of VITE_
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const api: AxiosInstance = axios.create({
   baseURL: `${API_URL}/api`,
