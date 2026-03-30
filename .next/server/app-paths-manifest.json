@@ -1,4 +1,7 @@
 {
-  "/login/page": "app/login/page.js",
-  "/(marketing)/page": "app/(marketing)/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(marketing)/page": "app/(marketing)/page.js",
+  "/(app)/dashboard/page": "app/(app)/dashboard/page.js",
+  "/(app)/documents/page": "app/(app)/documents/page.js",
+  "/(app)/quizzes/page": "app/(app)/quizzes/page.js"
 }
