@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { Providers } from '@/providers/Providers';
 
@@ -54,6 +55,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  verification: {
+    google: 'XYRY_IxlH1Tj-EHYd8wMm4LUxTp7n8_TIygo743N3SI',
+  },
 };
 
 export const viewport: Viewport = {
@@ -65,6 +69,20 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className="dark">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8K34E4XXB2"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8K34E4XXB2');
+          `}
+        </Script>
+      </head>
       <body suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
