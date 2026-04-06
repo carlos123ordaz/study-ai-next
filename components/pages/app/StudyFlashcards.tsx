@@ -75,7 +75,7 @@ export default function StudyFlashcards() {
 
   if (finished) {
     return (
-      <div className="max-w-2xl mx-auto text-center py-16">
+      <div className="max-w-2xl mx-auto text-center py-8 sm:py-16 px-4 sm:px-0">
         <div className="rounded-full bg-green-500/15 w-20 h-20 flex items-center justify-center mx-auto mb-6">
           <CheckCircle2 className="h-10 w-10 text-green-400" />
         </div>
@@ -102,15 +102,15 @@ export default function StudyFlashcards() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6 px-1 sm:px-0">
       {/* Header */}
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" onClick={() => router.push('/flashcards')}>
+      <div className="flex items-center gap-2 sm:gap-3">
+        <Button variant="ghost" size="icon" className="shrink-0" onClick={() => router.push('/flashcards')}>
           <ChevronLeft className="h-5 w-5" />
         </Button>
         <div className="flex-1 min-w-0">
-          <h1 className="text-lg font-semibold truncate">{set.title}</h1>
-          <p className="text-sm text-muted-foreground">
+          <h1 className="text-base sm:text-lg font-semibold truncate">{set.title}</h1>
+          <p className="text-xs sm:text-sm text-muted-foreground">
             {currentIndex + 1} / {cards.length}
           </p>
         </div>
@@ -135,66 +135,67 @@ export default function StudyFlashcards() {
           style={{
             transformStyle: 'preserve-3d',
             transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-            minHeight: '260px',
+            minHeight: '220px',
           }}
         >
           {/* Front */}
           <div
-            className="absolute inset-0 rounded-2xl border border-white/[0.08] bg-card p-8 flex flex-col items-center justify-center text-center"
+            className="absolute inset-0 rounded-2xl border border-white/[0.08] bg-card p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center text-center"
             style={{ backfaceVisibility: 'hidden' }}
           >
-            <p className="text-xs text-brand-400 font-medium uppercase tracking-widest mb-4">
+            <p className="text-xs text-brand-400 font-medium uppercase tracking-widest mb-3 sm:mb-4">
               Pregunta
             </p>
-            <p className="text-xl font-semibold leading-relaxed">{card.front}</p>
-            <p className="text-xs text-muted-foreground mt-6">
+            <p className="text-base sm:text-lg md:text-xl font-semibold leading-relaxed break-words w-full">{card.front}</p>
+            <p className="text-xs text-muted-foreground mt-4 sm:mt-6">
               Hacé clic para ver la respuesta
             </p>
           </div>
 
           {/* Back */}
           <div
-            className="absolute inset-0 rounded-2xl border border-brand-500/20 bg-gradient-to-br from-brand-500/10 via-card to-card p-8 flex flex-col items-center justify-center text-center"
+            className="absolute inset-0 rounded-2xl border border-brand-500/20 bg-gradient-to-br from-brand-500/10 via-card to-card p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center text-center"
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
             }}
           >
-            <p className="text-xs text-green-400 font-medium uppercase tracking-widest mb-4">
+            <p className="text-xs text-green-400 font-medium uppercase tracking-widest mb-3 sm:mb-4">
               Respuesta
             </p>
-            <p className="text-lg leading-relaxed text-foreground">{card.back}</p>
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-foreground break-words w-full">{card.back}</p>
           </div>
         </div>
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between gap-2 sm:gap-3">
         <Button
           variant="outline"
           size="icon"
+          className="shrink-0"
           onClick={handlePrev}
           disabled={currentIndex === 0}
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
 
-        <div className="flex gap-2 flex-1 justify-center">
+        <div className="flex gap-2 flex-1 justify-center min-w-0">
           <Button
             variant="outline"
-            className="flex-1 max-w-[160px] border-green-500/30 hover:bg-green-500/10 hover:text-green-400"
+            className="flex-1 max-w-[140px] sm:max-w-[160px] text-xs sm:text-sm border-green-500/30 hover:bg-green-500/10 hover:text-green-400"
             onClick={handleMarkKnown}
           >
-            <CheckCircle2 className="h-4 w-4 text-green-400" />
-            Ya la sé
+            <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0" />
+            <span className="truncate">Ya la sé</span>
           </Button>
-          <Button variant="outline" className="flex-1 max-w-[160px]" onClick={handleNext}>
-            Siguiente
-            <ArrowRight className="h-4 w-4" />
+          <Button variant="outline" className="flex-1 max-w-[140px] sm:max-w-[160px] text-xs sm:text-sm" onClick={handleNext}>
+            <span className="truncate">Siguiente</span>
+            <ArrowRight className="h-4 w-4 shrink-0" />
           </Button>
         </div>
 
-        <Button variant="ghost" size="icon" onClick={handleRestart}>
+        <Button variant="ghost" size="icon" className="shrink-0" onClick={handleRestart}>
           <RotateCcw className="h-4 w-4" />
         </Button>
       </div>

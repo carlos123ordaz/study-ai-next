@@ -28,15 +28,15 @@ function StatCard({
 }) {
   return (
     <Card>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">{label}</p>
-            {loading ? <Skeleton className="h-8 w-20" /> : <p className="text-2xl font-bold">{value}</p>}
-            {sub && <p className="text-xs text-muted-foreground mt-1">{sub}</p>}
+      <CardContent className="p-3 sm:p-6">
+        <div className="flex items-center justify-between gap-2">
+          <div className="min-w-0">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-0.5 sm:mb-1 truncate">{label}</p>
+            {loading ? <Skeleton className="h-6 sm:h-8 w-16 sm:w-20" /> : <p className="text-xl sm:text-2xl font-bold">{value}</p>}
+            {sub && <p className="text-xs text-muted-foreground mt-1 truncate">{sub}</p>}
           </div>
-          <div className={cn('rounded-xl p-3', iconColor)}>
-            <Icon className="h-5 w-5" />
+          <div className={cn('rounded-xl p-2 sm:p-3 shrink-0', iconColor)}>
+            <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
           </div>
         </div>
       </CardContent>
@@ -73,11 +73,11 @@ export default function Dashboard() {
   const attempts = attemptsData?.data ?? [];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 overflow-x-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold truncate">
             Hola, {user?.name?.split(' ')[0] ?? 'estudiante'} 👋
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
@@ -94,7 +94,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
         <StatCard
           icon={FileText} label="Documentos"
           value={docsData?.total ?? 0}
@@ -146,15 +146,15 @@ export default function Dashboard() {
           <div className="space-y-3">
             {docs.map((doc: any) => (
               <Link key={doc.id} href={`/documents/${doc.id}`}>
-                <div className="flex items-center gap-4 p-4 rounded-xl border border-white/[0.08] bg-card hover:border-white/[0.16] transition-colors">
-                  <div className="w-9 h-9 rounded-lg bg-blue-500/15 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-white/[0.08] bg-card hover:border-white/[0.16] transition-colors">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-blue-500/15 flex items-center justify-center shrink-0">
                     <FileText className="h-4 w-4 text-blue-400" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{doc.name}</p>
                     <p className="text-xs text-muted-foreground">{formatRelativeTime(doc.createdAt)}</p>
                   </div>
-                  <Badge variant="outline" className="text-xs shrink-0">{doc.status}</Badge>
+                  <Badge variant="outline" className="text-xs shrink-0 hidden sm:inline-flex">{doc.status}</Badge>
                 </div>
               </Link>
             ))}
@@ -188,8 +188,8 @@ export default function Dashboard() {
           <div className="space-y-2">
             {attempts.map((a: any) => (
               <Link key={a.id} href={`/quizzes/results/${a.id}`}>
-                <div className="flex items-center gap-4 p-4 rounded-xl border border-white/[0.08] bg-card hover:border-white/[0.16] transition-colors">
-                  <div className="w-9 h-9 rounded-lg bg-purple-500/15 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-white/[0.08] bg-card hover:border-white/[0.16] transition-colors">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-purple-500/15 flex items-center justify-center shrink-0">
                     <Brain className="h-4 w-4 text-purple-400" />
                   </div>
                   <div className="flex-1 min-w-0">

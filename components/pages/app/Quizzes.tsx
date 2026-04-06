@@ -152,7 +152,7 @@ export default function Quizzes() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-4 min-w-0">
-                          <h3 className="font-semibold truncate max-w-[180px] sm:max-w-none">{quiz.title}</h3>
+                          <h3 className="font-semibold truncate">{quiz.title}</h3>
                           <div className="flex items-center gap-1.5 shrink-0">
                             {bestScore !== null && (
                               <div className="text-right">

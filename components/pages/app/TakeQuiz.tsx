@@ -53,7 +53,7 @@ function QuestionCard({
               key={opt.id}
               onClick={() => onAnswer(question._id, opt.id)}
               className={cn(
-                'w-full text-left p-4 rounded-xl border transition-all',
+                'w-full text-left p-3 sm:p-4 rounded-xl border transition-all text-sm sm:text-base',
                 selected
                   ? 'border-brand-500/50 bg-brand-500/15 text-foreground'
                   : 'border-white/[0.08] hover:border-white/20 hover:bg-accent/50'
@@ -85,7 +85,7 @@ function QuestionCard({
                 onAnswer(question._id, next);
               }}
               className={cn(
-                'w-full text-left p-4 rounded-xl border transition-all flex items-center gap-3',
+                'w-full text-left p-3 sm:p-4 rounded-xl border transition-all flex items-center gap-3 text-sm sm:text-base',
                 isSelected
                   ? 'border-brand-500/50 bg-brand-500/15'
                   : 'border-white/[0.08] hover:border-white/20 hover:bg-accent/50'
@@ -220,11 +220,11 @@ export default function TakeQuiz() {
   const progress = ((currentIdx + 1) / questions.length) * 100;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold truncate">{quiz.title}</h1>
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-base sm:text-xl font-bold truncate">{quiz.title}</h1>
           <div className="flex items-center gap-2 mt-1">
             <Badge variant="brand">{DIFFICULTY_LABELS[quiz.difficulty]}</Badge>
             <span className="text-xs text-muted-foreground">
@@ -232,7 +232,7 @@ export default function TakeQuiz() {
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 text-muted-foreground">
+        <div className="flex items-center gap-1.5 text-muted-foreground shrink-0">
           <Clock className="h-4 w-4" />
           <span className="text-sm tabular-nums">{formatTime(elapsed)}</span>
         </div>
@@ -272,14 +272,16 @@ export default function TakeQuiz() {
       </Card>
 
       {/* Navigation */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         <Button
           variant="outline"
+          size="sm"
+          className="shrink-0 sm:size-default"
           onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))}
           disabled={currentIdx === 0}
         >
           <ChevronLeft className="h-4 w-4" />
-          Anterior
+          <span className="hidden sm:inline">Anterior</span>
         </Button>
 
         <div className="flex-1 flex justify-center gap-1 flex-wrap">
@@ -295,7 +297,7 @@ export default function TakeQuiz() {
                 key={idx}
                 onClick={() => setCurrentIdx(idx)}
                 className={cn(
-                  'w-7 h-7 rounded-md text-xs font-medium transition-all',
+                  'w-6 h-6 sm:w-7 sm:h-7 rounded-md text-[10px] sm:text-xs font-medium transition-all',
                   idx === currentIdx
                     ? 'bg-brand-500 text-white'
                     : hasAnswer
@@ -310,19 +312,21 @@ export default function TakeQuiz() {
         </div>
 
         {currentIdx < questions.length - 1 ? (
-          <Button onClick={() => setCurrentIdx((i) => i + 1)}>
-            Siguiente
+          <Button size="sm" className="shrink-0 sm:size-default" onClick={() => setCurrentIdx((i) => i + 1)}>
+            <span className="hidden sm:inline">Siguiente</span>
             <ChevronRight className="h-4 w-4" />
           </Button>
         ) : (
           <Button
             variant="gradient"
+            size="sm"
+            className="shrink-0 sm:size-default"
             onClick={() => submitMutation.mutate()}
             loading={submitMutation.isPending}
             disabled={answeredCount === 0}
           >
             <Send className="h-4 w-4" />
-            Enviar
+            <span className="hidden sm:inline">Enviar</span>
           </Button>
         )}
       </div>

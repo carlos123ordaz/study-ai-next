@@ -196,7 +196,7 @@ export default function Documents() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-4">
-                      <p className="font-medium truncate max-w-[180px] sm:max-w-none pt-0.5">{doc.name}</p>
+                      <p className="font-medium truncate pt-0.5">{doc.name}</p>
                       <div className="flex items-center gap-1 shrink-0">
                         <StatusBadge status={doc.status} />
                         <Button

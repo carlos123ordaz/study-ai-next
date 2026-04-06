@@ -68,8 +68,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className="dark">
-      <head>
+    <html lang="es" className="dark" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <Providers>{children}</Providers>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8K34E4XXB2"
           strategy="afterInteractive"
@@ -82,9 +83,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-8K34E4XXB2');
           `}
         </Script>
-      </head>
-      <body suppressHydrationWarning>
-        <Providers>{children}</Providers>
       </body>
     </html>
   );
