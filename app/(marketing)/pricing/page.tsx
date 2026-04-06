@@ -38,7 +38,7 @@ function PricingJsonLd() {
 const creditPacks = [
   {
     name: 'Starter',
-    credits: 100,
+    credits: 1000,
     price: 'Gratis',
     priceNote: 'Al registrarte',
     highlight: false,
@@ -51,7 +51,7 @@ const creditPacks = [
   },
   {
     name: 'Plus',
-    credits: 500,
+    credits: 5000,
     price: '$1.500',
     priceNote: 'ARS / única vez',
     highlight: true,
@@ -64,7 +64,7 @@ const creditPacks = [
   },
   {
     name: 'Pro',
-    credits: 1500,
+    credits: 15000,
     price: '$3.500',
     priceNote: 'ARS / única vez',
     highlight: false,
