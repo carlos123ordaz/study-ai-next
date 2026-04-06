@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 });
 
 function AuthRehydration() {
-  const { setUser, setLoading } = useAuthStore();
+  const { setUser, setLoading, logout } = useAuthStore();
   const initialized = useRef(false);
 
   useEffect(() => {
@@ -36,8 +36,12 @@ function AuthRehydration() {
     authService
       .getMe()
       .then((user) => setUser(user))
-      .catch(() => setLoading(false));
-  }, [setUser, setLoading]);
+      .catch(() => {
+        // Token is invalid/expired — clear everything so middleware
+        // doesn't keep redirecting back to protected routes
+        logout();
+      });
+  }, [setUser, setLoading, logout]);
 
   return null;
 }

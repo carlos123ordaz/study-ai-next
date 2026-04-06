@@ -22,12 +22,17 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+let isRedirectingToLogin = false;
+
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 401 && typeof window !== 'undefined') {
-      localStorage.removeItem('token');
-      if (!window.location.pathname.match(/^\/(login|$)/)) {
+      // Clear both localStorage AND cookie to stay in sync with middleware
+      setStoredToken(null);
+
+      if (!isRedirectingToLogin && !window.location.pathname.match(/^\/(login|auth\/callback|$)/)) {
+        isRedirectingToLogin = true;
         window.location.href = '/login';
       }
     }
